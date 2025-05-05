@@ -425,3 +425,215 @@ ul {
     margin-bottom: 1.5rem;
     color: var(--dark-color);
 }
+
+/* ===== Booking Section ===== ===== Booking Section ===== ===== Booking Section ========== Booking Section ===== */
+.booking {
+    background-color: var(--light-color);
+}
+
+.subtitle {
+    text-align: center;
+    margin-bottom: 3rem;
+    font-size: 1.2rem;
+}
+
+.booking-form {
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+.user-welcome {
+    margin-bottom: 20px;
+    padding: 10px;
+    text-align: center;
+    color: #d4af37;
+}
+
+.user-welcome p{
+    font-size: 22px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: var(--dark-color);
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-family: inherit;
+    font-size: 1rem;
+    transition: var(--transition);
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.2);
+}
+
+.submit-btn {
+    width: 100%;
+    margin-top: 20px;
+}
+
+/* ====== Booking Actions Styles ====== ====== Booking Actions Styles ====== ====== Booking Actions Styles ====== */
+.booking-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 25px; 
+    margin-bottom: 15px;
+}
+
+.booking-actions .btn {
+    padding: 8px 15px;
+    font-size: 0.9rem;
+    flex: 1;
+}
+
+.booking-actions .edit-booking-btn {
+    background-color: #4CAF50;
+}
+
+.booking-actions .edit-booking-btn:hover {
+    background-color: #3e8e41;
+}
+
+.booking-actions .cancel-booking-btn {
+    background-color: #f44336;
+}
+
+.booking-actions .cancel-booking-btn:hover {
+    background-color: #d32f2f;
+}
+
+.booking-item {
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #eee;
+    position: relative;
+}
+
+.booking-item:last-child {
+    border-bottom: none;
+}
+
+.booking-item hr {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    margin: 0;
+    border: none;
+    border-top: 1px solid #eee;
+}
+
+/* ====== Booking Item Styles ====== ====== Booking Item Styles ====== ====== Booking Item Styles ====== */
+.booking-header {
+    text-align: center;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #eee;
+}
+
+.booking-header h3 {
+    color: var(--primary-color);
+    margin-bottom: 5px;
+}
+
+.booking-header p {
+    color: var(--text-color);
+    font-size: 0.9rem;
+}
+
+.booking-item {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    padding: 20px;
+    margin-bottom: 20px;
+    transition: all 0.3s ease;
+}
+
+.booking-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.booking-item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px dashed #eee;
+}
+
+.booking-item-header h4 {
+    margin: 0;
+    color: var(--dark-color);
+}
+
+.booking-status {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.booking-item-content p {
+    margin-bottom: 8px;
+    display: flex;
+}
+
+.booking-item-content p span:first-child {
+    font-weight: 600;
+    min-width: 80px;
+    color: var(--dark-color);
+}
+
+.booking-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px dashed #eee;
+}
+
+/* Edit Mode Styles */
+.booking-form.edit-mode {
+    border-left: 4px solid var(--primary-color);
+    padding-left: 15px;
+}
+
+.booking-form.edit-mode .submit-btn {
+    background-color: #4CAF50;
+}
+
+.booking-form.edit-mode .submit-btn:hover {
+    background-color: #3e8e41;
+}
+
+.booking-form.edit-mode .form-title::after {
+    content: " (Editing)";
+    color: var(--primary-color);
+    font-weight: normal;
+}
