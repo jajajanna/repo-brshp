@@ -1031,3 +1031,109 @@ body.logged-in .auth-btn {
 body.logged-in .auth-btn:hover {
     background-color: #555;
 }
+
+/* =====CHECK======= =====CHECK======= =====CHECK======= =====CHECK======= */
+.check-booking-btn {
+    margin-left: 15px;
+    padding: 10px 20px;
+    background-color: var(--secondary-color);
+}
+
+.check-booking-btn:hover {
+    background-color: #444;
+}
+
+/* Booking Modal Styles */
+.booking-modal {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.7);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+  
+.booking-modal.active {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 1;
+}
+  
+.booking-modal-content {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 500px;
+    position: relative;
+    transform: translateY(-50px);
+    transition: transform 0.3s ease;
+    max-height: 80vh;
+    display: flex;
+    flex-direction: column;
+}
+  
+.booking-modal.active .booking-modal-content {
+    transform: translateY(0);
+}
+
+.booking-close {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 24px;
+    cursor: pointer;
+    color: var(--text-color);
+}
+
+.booking-details {
+    margin-top: 20px;
+    overflow-y: auto;
+    max-height: calc(70vh - 100px);
+    padding-right: 10px;
+    margin-bottom: 20px;
+}
+
+.booking-details p {
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.booking-details p span:first-child {
+    font-weight: 600;
+    color: var(--dark-color);
+}
+
+.no-booking {
+    text-align: center;
+    padding: 20px 0;
+}
+
+.no-booking .btn {
+    margin-top: 20px;
+}
+
+/* ====== Scrollbar styling ====== ====== Scrollbar styling ====== ====== Scrollbar styling ====== ====== */
+.booking-details::-webkit-scrollbar {
+    width: 8px;
+}
+
+.booking-details::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+.booking-details::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: 10px;
+}
+
+.booking-details::-webkit-scrollbar-thumb:hover {
+    background: #c19b2c;
+}
