@@ -637,3 +637,42 @@ ul {
     color: var(--primary-color);
     font-weight: normal;
 }
+
+/* ====== Contact Section ======  ====== Contact Section ======  ====== Contact Section ====== ====== */
+.contact-content {
+    display: flex;
+    gap: 50px;
+    margin-top: 50px;
+}
+
+.contact-info {
+    flex: 1;
+}
+
+.contact-info p {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.contact-info i {
+    margin-right: 15px;
+    color: var(--primary-color);
+    font-size: 1.2rem;
+    width: 25px;
+    text-align: center;
+}
+
+.branches {
+    flex: 1;
+}
+
+.branch {
+    margin-bottom: 30px;
+}
+
+.branch h4 {
+    color: var(--primary-color);
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+}
