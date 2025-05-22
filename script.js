@@ -14,4 +14,14 @@ document.addEventListener('DOMContentLoaded', function() {
         const bookingDetails = document.getElementById('bookingDetails');
         const bookingClose = document.querySelector('.booking-close');
 
+            let authBtn = document.getElementById('authBtn');
+            if (!authBtn) {
+                authBtn = document.createElement('button');
+                authBtn.className = 'btn auth-btn';
+                authBtn.textContent = 'Login';
+                authBtn.id = 'authBtn';
+                authBtn.style.marginLeft = 'auto';
+                document.querySelector('.auth-container').appendChild(authBtn);
+            }
+
             });
