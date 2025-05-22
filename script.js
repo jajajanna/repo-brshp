@@ -440,3 +440,76 @@ document.addEventListener('DOMContentLoaded', function() {
             populateBookingForm(booking, index);
         }
     }
+
+
+        function populateBookingForm(booking, index) {
+        const bookingForm = document.getElementById('booking-form');
+        
+        // Add edit mode class
+        bookingForm.classList.add('edit-mode');
+
+        if (!bookingForm) {
+            console.error('Booking form not found');
+            return;
+        }
+        
+        // Convert time to 24-hour format if needed
+        let timeValue = booking.time;
+        if (!timeValue.includes(':')) {
+            // Handle case where time might be in different format
+            timeValue = '09:00'; // default fallback
+        }
+        
+        // Populate form fields
+        bookingForm.querySelector('#phone').value = booking.phone || '';
+        bookingForm.querySelector('#time').value = timeValue;
+        bookingForm.querySelector('#service').value = booking.service || 'haircut';
+        bookingForm.querySelector('#date').value = booking.date || '';
+        bookingForm.querySelector('#comments').value = booking.comments || '';
+        
+        // Add or update hidden field for edit index
+        let editField = bookingForm.querySelector('input[name="edit-index"]');
+        if (!editField) {
+            editField = document.createElement('input');
+            editField.type = 'hidden';
+            editField.name = 'edit-index';
+            bookingForm.appendChild(editField);
+        }
+        editField.value = index;
+        
+        // Update the submit button text
+        const submitBtn = bookingForm.querySelector('.submit-btn');
+        if (submitBtn) {
+            submitBtn.textContent = 'Update Booking';
+        }
+        
+        // Focus on the first field
+        bookingForm.querySelector('#service').focus();
+
+         // Add visual indicator
+        const formTitle = bookingForm.querySelector('.form-title');
+        if (formTitle) {
+            formTitle.dataset.originalText = formTitle.textContent;
+            formTitle.textContent = 'Edit Booking';
+        }
+        
+        // Add cancel edit button if not exists
+        if (!bookingForm.querySelector('.cancel-edit-btn')) {
+            const cancelBtn = document.createElement('button');
+            cancelBtn.type = 'button';
+            cancelBtn.className = 'btn cancel-edit-btn';
+            cancelBtn.textContent = 'Cancel Edit';
+            cancelBtn.style.marginTop = '10px';
+            cancelBtn.style.marginRight = '10px';
+            cancelBtn.style.backgroundColor = '#f44336';
+            
+            cancelBtn.addEventListener('click', function() {
+                resetBookingForm();
+            });
+            
+            const submitBtn = bookingForm.querySelector('.submit-btn');
+            if (submitBtn) {
+                submitBtn.insertAdjacentElement('beforebegin', cancelBtn);
+            }
+        }
+    }
