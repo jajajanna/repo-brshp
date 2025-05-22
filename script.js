@@ -59,4 +59,28 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
+
+        // Close modal handlers
+    bookingClose.addEventListener('click', closeBookingModal);
+    closeModal.addEventListener('click', hideAuthModal);
+    
+    // Blur overlay click handler
+    if (blurOverlay) {
+        blurOverlay.addEventListener('click', function() {
+            closeBookingModal();
+            hideAuthModal();
+        });
+    }
+
+    // Login handler
+    if (loginSubmit) {
+        loginSubmit.addEventListener('click', handleLogin);
+    }
+    
+    // Signup handler
+    if (signupSubmit) {
+        signupSubmit.addEventListener('click', handleSignup);
+    }
+
+
             });
