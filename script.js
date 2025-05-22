@@ -408,3 +408,35 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
     }
+
+        function handleEditBooking(e) {
+        const bookingItem = e.target.closest('.booking-item');
+        const index = parseInt(bookingItem.dataset.index);
+        const bookings = JSON.parse(localStorage.getItem('bookings')) || [];
+        
+        if (index < 0 || index >= bookings.length) {
+            alert('Error: Booking not found');
+            return;
+        }
+        
+        const booking = bookings[index];
+        
+        // Close the booking modal first
+        closeBookingModal();
+        
+        // Scroll to booking form
+        const bookingSection = document.querySelector('#booking');
+        if (bookingSection) {
+            window.scrollTo({
+                top: bookingSection.offsetTop - 80,
+                behavior: 'smooth'
+            });
+            
+            // Wait for scroll to complete before populating form
+            setTimeout(() => {
+                populateBookingForm(booking, index);
+            }, 500);
+        } else {
+            populateBookingForm(booking, index);
+        }
+    }
