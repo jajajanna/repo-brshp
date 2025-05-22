@@ -551,3 +551,18 @@ document.addEventListener('DOMContentLoaded', function() {
         if (cancelBtn) {
             cancelBtn.remove();
         }
+
+
+            function handleCancelBooking(e) {
+        if (confirm('Are you sure you want to cancel this booking?')) {
+            const bookingItem = e.target.closest('.booking-item');
+            const index = bookingItem.dataset.index;
+            
+            let bookings = JSON.parse(localStorage.getItem('bookings'));
+            bookings.splice(index, 1); // Remove the booking
+            localStorage.setItem('bookings', JSON.stringify(bookings));
+            
+            // Refresh the booking modal
+            showBookingDetails();
+        }
+    }
