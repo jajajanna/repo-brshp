@@ -144,6 +144,69 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
 
+        // Booking form submission
+    const bookingForm = document.getElementById('booking-form');
+
+    // In the booking form submission handler
+    if (bookingForm) {
+        bookingForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+            if (!currentUser) {
+                showAuthModal();
+                return;
+            }
+            
+            const formData = new FormData(this);
+            const data = {};
+            formData.forEach((value, key) => {
+                data[key] = value;
+            });
+            
+            // Add user information
+            data.fullname = currentUser.name;
+            data.email = currentUser.email;
+            
+            let bookings = JSON.parse(localStorage.getItem('bookings')) || [];
+            const editIndex = formData.get('edit-index');
+            
+            // Validate required fields
+            if (!data.service || !data.date || !data.time) {
+                alert('Please fill in all required fields');
+                return;
+            }
+            
+            if (editIndex !== null && editIndex !== undefined) {
+                // Update existing booking
+                const existingId = bookings[editIndex].bookingId;
+                data.bookingId = existingId; // Preserve the original ID
+                bookings[editIndex] = data;
+                
+                // Show success message and refresh
+                alert('Booking updated successfully!');
+                
+                // Reset form first
+                resetBookingForm();
+                
+                // Then refresh the booking modal if it's open
+                if (bookingModal.classList.contains('active')) {
+                    showBookingDetails();
+                }
+            } else {
+                // Create new booking
+                data.bookingId = Date.now();
+                bookings.push(data);
+                alert('Thank you for your booking! We will contact you shortly to confirm your appointment.');
+                this.reset();
+            }
+            
+            localStorage.setItem('bookings', JSON.stringify(bookings));
+        });
+    }
+
+
+
 
 
             });
