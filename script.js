@@ -317,3 +317,94 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
 
+    // Add this with your other modal functions
+    function showBookingDetails() {
+        const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        const bookings = JSON.parse(localStorage.getItem('bookings')) || [];
+        const userBookings = bookings.filter(booking => booking.email === currentUser.email);
+        
+        document.body.style.overflow = 'hidden';
+        blurOverlay.classList.add('active');
+        bookingModal.classList.add('active');
+        
+        if (userBookings.length === 0) {
+            bookingDetails.innerHTML = `
+                <div class="no-booking">
+                    <p>Welcome back, ${currentUser.name}!</p>
+                    <p>No bookings found.</p>
+                    <p>Would you like to book now?</p>
+                    <a href="#booking" class="btn book-now-btn">Book Now</a>
+                </div>
+            `;
+            
+            setTimeout(() => {
+                const bookNowBtn = document.querySelector('.book-now-btn');
+                if (bookNowBtn) {
+                    bookNowBtn.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        closeBookingModal();
+                        
+                        const bookingSection = document.querySelector('#booking');
+                        if (bookingSection) {
+                            window.scrollTo({
+                                top: bookingSection.offsetTop - 80,
+                                behavior: 'smooth'
+                            });
+                        }
+                    });
+                }
+            }, 0);
+        } else {
+            // Sort bookings by date (newest first)
+            userBookings.sort((a, b) => new Date(b.date) - new Date(a.date));
+            
+            let html = `
+                <div class="booking-header">
+                    <h3>Your Bookings (${userBookings.length})</h3>
+                    <p>You have ${userBookings.length} upcoming appointment${userBookings.length !== 1 ? 's' : ''}</p>
+                </div>
+            `;
+            
+            userBookings.forEach((booking, index) => {
+                const bookingDate = new Date(booking.date);
+                const formattedDate = bookingDate.toLocaleDateString('en-US', { 
+                    weekday: 'long', 
+                    year: 'numeric', 
+                    month: 'long', 
+                    day: 'numeric' 
+                });
+                
+                html += `
+                    <div class="booking-item" data-index="${bookings.findIndex(b => b.bookingId === booking.bookingId)}">
+                        <div class="booking-item-header">
+                            <h4>Appointment #${userBookings.length - index}</h4>
+                            <span class="booking-status">Upcoming</span>
+                        </div>
+                        <div class="booking-item-content">
+                            <p><span>Name:</span> <span class="booking-fullname">${booking.fullname}</span></p>
+                            <p><span>Phone:</span> <span class="booking-phone">${booking.phone}</span></p>
+                            <p><span>Service:</span> <span class="booking-service">${booking.service}</span></p>
+                            <p><span>Date:</span> <span class="booking-date">${formattedDate}</span></p>
+                            <p><span>Time:</span> <span class="booking-time">${booking.time}</span></p>
+                            ${booking.comments ? `<p><span>Notes:</span> <span class="booking-comments">${booking.comments}</span></p>` : ''}
+                        </div>
+                        <div class="booking-actions">
+                            <button class="btn edit-booking-btn">Edit</button>
+                            <button class="btn cancel-booking-btn">Cancel</button>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            bookingDetails.innerHTML = html;
+            
+            // Add event listeners to the new buttons
+            document.querySelectorAll('.edit-booking-btn').forEach(btn => {
+                btn.addEventListener('click', handleEditBooking);
+            });
+            
+            document.querySelectorAll('.cancel-booking-btn').forEach(btn => {
+                btn.addEventListener('click', handleCancelBooking);
+            });
+        }
+    }
