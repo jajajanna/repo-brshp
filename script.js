@@ -24,4 +24,26 @@ document.addEventListener('DOMContentLoaded', function() {
                 document.querySelector('.auth-container').appendChild(authBtn);
             }
 
+                checkLoginStatus();
+
+    // Mobile menu toggle
+    const menuToggle = document.querySelector('.menu-toggle');
+    const nav = document.querySelector('.nav');
+    
+    menuToggle.addEventListener('click', function() {
+        nav.classList.toggle('active');
+        menuToggle.querySelector('i').classList.toggle('fa-times');
+        menuToggle.querySelector('i').classList.toggle('fa-bars');
+    });
+
+    // Auth button event listener
+    authBtn.addEventListener('click', function() {
+        const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        if (currentUser) {
+            handleLogout();
+        } else {
+            showAuthModal();
+        }
+    });
+
             });
