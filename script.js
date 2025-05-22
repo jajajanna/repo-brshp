@@ -46,4 +46,17 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
+
+        // Tab switching
+    tabBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            tabBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            
+            const tab = btn.dataset.tab;
+            authForms.forEach(form => form.classList.remove('active'));
+            document.getElementById(`${tab}Form`).classList.add('active');
+        });
+    });
+
             });
