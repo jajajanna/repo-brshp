@@ -223,5 +223,97 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
 
+    // ====== FUNCTIONS ===== ====== FUNCTIONS ===== ====== FUNCTIONS ===== ====== FUNCTIONS ===== 
 
-            });
+    // Modal Functions
+    function showAuthModal() {
+        document.body.style.overflow = 'hidden';
+        blurOverlay.classList.add('active');
+        authModal.classList.add('active');
+    }
+
+    function hideAuthModal() {
+        document.body.style.overflow = '';
+        blurOverlay.classList.remove('active');
+        authModal.classList.remove('active');
+    }
+
+    // Auth Functions
+    function handleLogin() {
+        const email = document.getElementById('loginEmail').value;
+        const password = document.getElementById('loginPassword').value;
+        
+        if (!email || !password) {
+            alert('Please fill in all fields');
+            return;
+        }
+        
+        const users = JSON.parse(localStorage.getItem('users')) || [];
+        const user = users.find(u => u.email === email && u.password === password);
+        
+        if (user) {
+            localStorage.setItem('currentUser', JSON.stringify(user));
+            successfulLogin(user.name);
+        } else {
+            alert('Invalid credentials');
+        }
+    }
+
+    function handleSignup() {
+        const name = document.getElementById('signupName').value;
+        const email = document.getElementById('signupEmail').value;
+        const password = document.getElementById('signupPassword').value;
+        
+        if (!name || !email || !password) {
+            alert('Please fill in all fields');
+            return;
+        }
+        
+        const users = JSON.parse(localStorage.getItem('users')) || [];
+        
+        if (users.some(u => u.email === email)) {
+            alert('Email already exists');
+            return;
+        }
+        
+        const newUser = { name, email, password };
+        users.push(newUser);
+        localStorage.setItem('users', JSON.stringify(users));
+        localStorage.setItem('currentUser', JSON.stringify(newUser));
+        
+        successfulLogin(name);
+    }
+
+    function successfulLogin(name) {
+        // Update UI
+        authBtn.textContent = 'Logout';
+        document.body.classList.add('logged-in');
+        
+        // Close modal and clear fields
+        setTimeout(() => {
+            hideAuthModal();
+            document.getElementById('loginEmail').value = '';
+            document.getElementById('loginPassword').value = '';
+            document.getElementById('signupName').value = '';
+            document.getElementById('signupEmail').value = '';
+            document.getElementById('signupPassword').value = '';
+        }, 500);
+    }
+       
+    function handleLogout() {
+        localStorage.removeItem('currentUser');
+        document.body.classList.remove('logged-in');
+        authBtn.textContent = 'Login';
+    }
+
+    // In checkLoginStatus() - REPLACE with:
+    function checkLoginStatus() {
+        const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        if (currentUser) {
+            authBtn.textContent = 'Logout';
+            document.body.classList.add('logged-in');
+        }
+    }
+    });
+
+
