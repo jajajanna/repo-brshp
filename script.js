@@ -206,6 +206,21 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
 
+        // Add this event listener with your other event listeners
+    checkBookingBtn.addEventListener('click', function() {
+        const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        
+        if (!currentUser) {
+            showAuthModal();
+        } else {
+            showBookingDetails();
+        }
+    });
+
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    if (currentUser && document.getElementById('bookingUserName')) {
+        document.getElementById('bookingUserName').textContent = currentUser.name;
+    }
 
 
 
