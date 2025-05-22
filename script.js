@@ -513,3 +513,41 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
     }
+
+
+        function resetBookingForm() {
+        const bookingForm = document.getElementById('booking-form');
+        
+        // Remove edit mode
+        bookingForm.classList.remove('edit-mode');
+        bookingForm.reset();
+        
+        // Remove hidden edit field
+        const editField = bookingForm.querySelector('input[name="edit-index"]');
+        if (editField) {
+            editField.remove();
+        }
+        
+        // Reset submit button text
+        const submitBtn = bookingForm.querySelector('.submit-btn');
+        if (submitBtn) {
+            submitBtn.textContent = 'Submit';
+        }
+        
+        // Reset form title
+        const formTitle = bookingForm.querySelector('.form-title');
+        if (formTitle && formTitle.dataset.originalText) {
+            formTitle.textContent = formTitle.dataset.originalText;
+        }
+        
+        // Remove cancel button
+        const cancelBtn = bookingForm.querySelector('.cancel-edit-btn');
+        if (cancelBtn) {
+            cancelBtn.remove();
+        }
+    }        
+        // Remove cancel button
+        const cancelBtn = bookingForm.querySelector('.cancel-edit-btn');
+        if (cancelBtn) {
+            cancelBtn.remove();
+        }
