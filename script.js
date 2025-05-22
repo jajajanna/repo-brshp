@@ -111,5 +111,39 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
 
+        // Header scroll effect
+    const header = document.querySelector('.header');
+    window.addEventListener('scroll', function() {
+        if (window.scrollY > 100) {
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }
+    });
+  
+    // Active link highlighting
+    const sections = document.querySelectorAll('section');
+    window.addEventListener('scroll', function() {
+        let current = '';
+        
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.clientHeight;
+            
+            if (pageYOffset >= sectionTop - 200) {
+                current = section.getAttribute('id');
+            }
+        });
+        
+        document.querySelectorAll('.nav ul li a').forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === `#${current}`) {
+                link.classList.add('active');
+            }
+        });
+    });
+
+
+
 
             });
