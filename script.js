@@ -566,3 +566,18 @@ document.addEventListener('DOMContentLoaded', function() {
             showBookingDetails();
         }
     }
+
+        // booking modal close functionality
+    function closeBookingModal() {
+        document.body.style.overflow = '';
+        blurOverlay.classList.remove('active');
+        bookingModal.classList.remove('active');
+    }
+
+    // make the modal close when clicking the overlay
+    if (blurOverlay) {
+        blurOverlay.addEventListener('click', function() {
+            closeBookingModal();
+            hideAuthModal(); // Also ensure auth modal closes
+        });
+    }
